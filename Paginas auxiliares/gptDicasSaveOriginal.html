@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manipulação de Áudio</title>
+</head>
+
+<style>
+/* Estilos CSS aqui */
+</style>
+
+<body>
+    <h1>Manipulação de Áudio</h1>
+    <div id="minhaDiv"></div>
+    <button id="criarBotao">Criar Botão</button><br><br>
+
+    <script>
+        // Array para armazenar os conjuntos de formulário e botão de reprodução de áudio
+        let botoesBlocos = [];
+
+        // Função para criar um novo conjunto de formulário e botão de reprodução de áudio
+        function criarConjunto() {
+            // Cria um novo ID único para o conjunto
+            const conjuntoID = `conjunto_${botoesBlocos.length}`;
+
+            // Cria um novo conjunto de elementos
+            const novoConjunto = `
+                <div id="${conjuntoID}">
+                    <form>
+                        <label for="tempo_${conjuntoID}">Tempo do Áudio (segundos):</label>
+                        <input type="number" id="tempo_${conjuntoID}" name="tempo" min="1" step="1" max="60" required>
+                        <button type="button" onclick="reproduzirAudio('${conjuntoID}')">Reproduzir</button>
+                    </form>
+                </div>
+            `;
+
+            // Adiciona o novo conjunto à array
+            botoesBlocos.push(novoConjunto);
+
+            // Atualiza a div minhaDiv com os conjuntos de elementos
+            document.getElementById("minhaDiv").innerHTML = botoesBlocos.join('');
+        }
+
+        // Função para reproduzir o áudio associado ao conjunto
+        function reproduzirAudio(conjuntoID) {
+            const tempoInput = document.getElementById(`tempo_${conjuntoID}`);
+            const tempo = parseInt(tempoInput.value);
+
+            // Verifica se o tempo está dentro dos limites especificados
+            if (tempo <= 0 || tempo > 60) {
+                alert("Por favor, insira um tempo entre 1 e 60 segundos.");
+                return; // Sai da função se o tempo estiver fora dos limites
+            }
+
+            // Cria um novo elemento de áudio
+            const audio = new Audio("6_Lá_440Hz_1seg.mp3");
+
+            // Define o tempo inicial de reprodução
+            audio.currentTime = 0;
+
+            // Define o tempo final de reprodução
+            audio.addEventListener("timeupdate", function() {
+                if (audio.currentTime >= tempo) {
+                    audio.pause();
+                }
+            });
+
+            // Reproduz o áudio
+            audio.play();
+        }
+
+        // Adiciona um evento de clique ao botão "Criar Botão"
+        document.getElementById("criarBotao").addEventListener("click", function() {
+            criarConjunto();
+        });
+    </script>
+</body>
+</html>

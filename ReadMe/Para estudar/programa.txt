@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>_duíno IDE</title>
+    <link rel="shortcut icon" href="./Imagens/xR_duin_Icon.jpg"/>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<style>
+.body{
+  background-color: #d6e0df;
+  background-image:  url('./Imagens/fundoProgram.png');
+  background-size:100%;
+  background-position: center;
+  background-repeat:no-repeat;
+}
+
+#AudiosArray{
+  background-color: #3473e9; /* Cor de fundo do botão */
+  color: white; /* Cor do texto do botão */
+  border: 2px solid #f03a3a; /* Borda do botão */
+  padding: 10px 20px; /* Espaçamento interno do botão */
+  border-radius: 5px; /* Borda arredondada do botão */
+  font-size: 16px; /* Tamanho da fonte do botão */
+  margin-left: 85%;
+
+
+}
+ #botaoApagar1{
+    
+      background-color: white; /* Cor de fundo do botão */
+          color:black; /* Cor do texto do botão */
+          border: 4px solid blue; /* Borda do botão */
+          padding: 10px 20px; /* Espaçamento interno do botão */
+          border-radius: 5px; /* Borda arredondada do botão */
+          font-size: 20px; /* Tamanho da fonte do botão */    
+          margin-top: 0px;
+          text-shadow: 1px 1px gray;
+          font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+          
+    }
+ #botaoParar{
+  
+    background-color: blue; /* Cor de fundo do botão */
+        color: white; /* Cor do texto do botão */
+        border: 4px solid #fe7c0a; /* Borda do botão */
+        padding: 10px 20px; /* Espaçamento interno do botão */
+        border-radius: 5px; /* Borda arredondada do botão */
+        font-size: 20px; /* Tamanho da fonte do botão */
+        margin-top: 0px;
+        font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  }
+#gravador{
+    background-color: #f70a2e; /* Cor de fundo do botão */
+        color: black; /* Cor do texto do botão */
+        border: 4px solid black; /* Borda do botão */
+        padding: 10px 20px; /* Espaçamento interno do botão */
+        border-radius: 20px; /* Borda arredondada do botão */
+        font-size: 20px; /* Tamanho da fonte do botão */  
+        margin-top: 0px;
+        margin-left: 85%;
+        color: black;
+        text-shadow: 1px 1px white;
+        font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  }
+#topo{
+  width: 100%;
+}
+ #paragrafo{
+display: inline-block;
+ }
+ #botoesLogicos{
+  display:inline-block;
+  margin-left: 480px;/*define a distancia entre as divs*/
+ 
+ }
+    
+    .cabeçalho{
+      margin-top: 0px;
+     
+      color:#8e0fe8;
+      font-family:Georgia, 'Times New Roman', Times, serif;
+      font-size: 2.5em;
+      border: 0px;
+      text-indent: 120px;
+      text-shadow: 3px 2px rgb(136, 171, 236);
+      
+    }
+    
+    .aviso{
+      font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+       font-size: 2.0em;
+       text-align:center;
+    }
+    
+    #meusBotoes {
+        display: inline-block;/*define formato e cores para a box e conteudo dos botões*/
+        vertical-align: top;
+        margin-right: 250px;/*define a distancia entre as divs*/
+        overflow-y: auto;/* sobre a barra de rolagem */
+        height: 450px; /* ou qualquer outra altura desejada */
+      }
+      #minhaDiv {
+        display: inline-block;
+        vertical-align: top;
+        justify-content: center;
+        align-items:flex-start;
+        position: relative;
+        top: 0;
+       font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+       font-size: 0.9em;
+       text-align:center;
+       text-shadow: 1px 1px rgb(78, 63, 143);
+        
+      }
+     
+      #mensagem,
+      #botao1
+      {
+        background-color: #8e0fe8;/*define estilização de box dos botoes de forma independente*/
+        color: black;
+        border: 5px solid rgb(53, 4, 252);
+        padding: 5px;
+        margin: 5px;
+        width: 120px;
+        height: 40px;
+        font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-size: 1.0em;
+        text-align:center;
+        border-radius: 10%;
+      
+      }
+
+      #botao2{
+        background-color:rgb(128, 53, 24);/*define estilização de box dos botoes de forma independente*/
+        color: white;
+        border: 3px solid black;
+        padding: 5px;
+        margin: 5px;
+        width: 120px;
+        height: 40px;
+        font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-size: 1.0em;
+        text-align:center;
+        border-radius: 15%;
+
+      }
+      #botao3{
+        background-color: rgb(73, 247, 51);/*define estilização de box dos botoes de forma independente*/
+        color: white;
+        border: 3px solid black;
+        padding: 5px;
+        margin: 5px;
+        width: 120px;
+        height: 40px;
+        font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-size: 1.0em;
+        text-align:center;
+        border-radius: 15%;
+
+      }
+      #botao4{
+        background-color: rgb(250, 141, 39);/*define estilização de box dos botoes de forma independente*/
+        color: white;
+        border: 3px solid black;
+        padding: 5px;
+        margin: 5px;
+        width: 120px;
+        height: 40px;
+        font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-size: 1.0em;
+        text-align:center;
+        border-radius: 15%;
+      }
+
+      #botao5{
+        background-color:  rgb(81, 92, 245);/*define estilização de box dos botoes de forma independente*/
+        color: white;
+        border: 3px solid black;
+        padding: 5px;
+        margin: 5px;
+        width: 120px;
+        height: 40px;
+        font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-size: 1.0em;
+        text-align:center;
+        border-radius: 15%;
+
+      }
+      #botao6{
+        background-color:  rgb(234, 250, 7);/*define estilização de box dos botoes de forma independente*/
+        color: white;
+        border: 3px solid black;
+        padding: 5px;
+        margin: 5px;
+        width: 120px;
+        height: 40px;
+        font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-size: 1.0em;
+        text-align:center;
+        border-radius: 15%;
+
+      }
+      #botao7{
+        background-color: rgb(191, 14, 245);/*define estilização de box dos botoes de forma independente*/
+        color: white;
+        border: 3px solid black;
+        padding: 5px;
+        margin: 5px;
+        width: 120px;
+        height: 40px;
+        font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-size: 1.0em;
+        text-align:center;
+        border-radius: 15%;
+      
+
+      }
+      #botao8{
+        background-color: rgb(248, 7, 99);/*define estilização de box dos botoes de forma independente*/
+        color: white;
+        border: 3px solid black;
+        padding: 5px;
+        margin: 5px;
+        width: 120px;
+        height: 40px;
+        font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-size: 1.0em;
+        text-align:center;
+        border-radius: 15%;
+
+      }
+      #botao9{
+        background-color:  rgb(163, 110, 88);/*define estilização de box dos botoes de forma independente*/
+        color: white;
+        border: 3px solid black;
+        padding: 5px;
+        margin: 5px;
+        width: 120px;
+        height: 40px;
+        font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-size: 1.0em;
+        text-align:center;
+        border-radius: 15%;
+
+      }
+
+      .titulos{
+        color: rgb(128, 53, 24);
+        text-shadow: 1px 1px rgb(78, 63, 143);
+        font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-size: 1.5em;
+      }
+
+      .titulos2{
+        color: rgb(73, 247, 51);
+        text-shadow: 1px 1px rgb(78, 63, 143);
+        font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-size: 1.5em;
+      }
+
+      .titulos3{
+        color: rgb(250, 141, 39);
+        text-shadow: 1px 1px rgb(78, 63, 143);
+        font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-size: 1.5em;
+      }
+      .titulos4{
+        color: rgb(81, 92, 245);
+        text-shadow: 1px 1px rgb(78, 63, 143);
+        font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-size: 1.5em;
+      }
+      .titulos5{
+        color: rgb(234, 250, 7);
+        text-shadow: 1px 1px rgb(78, 63, 143);
+        font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-size: 1.5em;
+      }
+
+      .titulos6{
+        color: rgb(191, 14, 245);
+        text-shadow: 1px 1px rgb(78, 63, 143);
+        font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-size: 1.5em;
+      }
+
+      .titulos7{
+        color: rgb(248, 7, 99);
+        text-shadow: 1px 1px rgb(78, 63, 143);
+        font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-size: 1.5em;
+      }
+      .titulos8{
+        color: rgb(163, 110, 88);
+        text-shadow: 1px 1px rgb(78, 63, 143);
+        font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-size: 1.5em;
+      }
+      
+      .titu{
+        color: brown;
+        text-shadow: 1px 1px blue;
+        font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-size: 1.1em;
+      }
+    
+    .letrasLabel{
+        color: rgb(242, 204, 247);
+        text-shadow: 1px 1px rgb(78, 63, 143);
+        font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-size: 1.3em;
+    }
+
+    .botaoSom {
+        background-color: rgb(128, 53, 24); /* Cor de fundo do botão */
+        color: #ffffff; /* Cor do texto do botão */
+        border: 2px solid #000000; /* Borda do botão */
+        padding: 10px 20px; /* Espaçamento interno do botão */
+        border-radius: 5px; /* Borda arredondada do botão */
+        font-size: 12px; /* Tamanho da fonte do botão */
+        margin-top: 10px;   
+        font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    }
+    .botaoSom2 {
+      background-color: rgb(73, 247, 51); /* Cor de fundo do botão */
+      color: #ffffff; /* Cor do texto do botão */
+      border: 2px solid #000000; /* Borda do botão */
+      padding: 10px 20px; /* Espaçamento interno do botão */
+      border-radius: 5px; /* Borda arredondada do botão */
+      font-size: 12px; /* Tamanho da fonte do botão */
+      margin-top: 10px;
+      font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;   
+  }
+
+  .botaoSom3 {
+    background-color: rgb(250, 141, 39); /* Cor de fundo do botão */
+    color: #ffffff; /* Cor do texto do botão */
+    border: 2px solid #000000; /* Borda do botão */
+    padding: 10px 20px; /* Espaçamento interno do botão */
+    border-radius: 5px; /* Borda arredondada do botão */
+    font-size: 12px; /* Tamanho da fonte do botão */
+    margin-top: 10px;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;   
+}
+.botaoSom4 {
+  background-color: rgb(81, 92, 245); /* Cor de fundo do botão */
+  color: #ffffff; /* Cor do texto do botão */
+  border: 2px solid #000000; /* Borda do botão */
+  padding: 10px 20px; /* Espaçamento interno do botão */
+  border-radius: 5px; /* Borda arredondada do botão */
+  font-size: 12px; /* Tamanho da fonte do botão */
+  margin-top: 10px;
+  font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;   
+}
+.botaoSom5 {
+  background-color: rgb(234, 250, 7); /* Cor de fundo do botão */
+  color: #ffffff; /* Cor do texto do botão */
+  border: 2px solid #000000; /* Borda do botão */
+  padding: 10px 20px; /* Espaçamento interno do botão */
+  border-radius: 5px; /* Borda arredondada do botão */
+  font-size: 12px; /* Tamanho da fonte do botão */
+  margin-top: 10px;
+  font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;   
+}
+.botaoSom6 {
+  background-color: rgb(191, 14, 245); /* Cor de fundo do botão */
+  color: #ffffff; /* Cor do texto do botão */
+  border: 2px solid #000000; /* Borda do botão */
+  padding: 10px 20px; /* Espaçamento interno do botão */
+  border-radius: 5px; /* Borda arredondada do botão */
+  font-size: 12px; /* Tamanho da fonte do botão */
+  margin-top: 10px;
+  font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;   
+}
+.botaoSom7 {
+  background-color: rgb(248, 7, 99); /* Cor de fundo do botão */
+  color: #ffffff; /* Cor do texto do botão */
+  border: 2px solid #000000; /* Borda do botão */
+  padding: 10px 20px; /* Espaçamento interno do botão */
+  border-radius: 5px; /* Borda arredondada do botão */
+  font-size: 12px; /* Tamanho da fonte do botão */
+  margin-top: 10px;
+  font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;   
+}
+.botaoSom8 {
+  background-color: rgb(163, 110, 88); /* Cor de fundo do botão */
+  color: #ffffff; /* Cor do texto do botão */
+  border: 2px solid #000000; /* Borda do botão */
+  padding: 10px 20px; /* Espaçamento interno do botão */
+  border-radius: 5px; /* Borda arredondada do botão */
+  font-size: 12px; /* Tamanho da fonte do botão */
+  margin-top: 10px;
+  font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;   
+}
+
+</style>
+
+
+<body class="body">
+    
+
+  
+          <div id="topo">
+            <div id="paragrafo">
+            <p class="cabeçalho">xR_duíno IDE versão 1.0</p><br><br>
+            </div>
+            <div id="botoesLogicos">
+            <button id="botaoApagar1">Apagar blocos</button><br><br>
+            <button id="botaoParar">BREAK SOUND !</button>
+            </div>
+          </div>
+  
+
+        <div id="conteudo">
+            <div id="meusBotoes">
+              <spam class="titu">O autor diz:</spam><br>
+              <button id="mensagem">Bons estudos!</button><br>
+              <spam class="titu">Sobre este Programa:</spam><br>
+              <button id="botao1">Helo xR_duíno!</button><br>
+    
+              <spam class="titulos">Dó</spam><br>
+              <button id="botao2">261,63 Hz</button><br>
+              <spam class="titulos2">Ré</spam><br>
+              <button id="botao3">293,66 Hz</button><br><!-- + botões-->
+              <spam class="titulos3">Mi</spam><br>
+              <button id="botao4">329,63 Hz</button><br>
+              <spam class="titulos4">Fá</spam><br>
+              <button id="botao5">349,23 Hz</button><br>
+              <spam class="titulos5">Sol</spam><br>
+              <button id="botao6">392 Hz</button><br>
+              <spam class="titulos6">Lá</spam><br>
+              <button id="botao7">440 Hz</button><br>
+              <spam class="titulos7">Si</spam><br>
+              <button id="botao8">493,88 Hz</button><br>
+              <spam class="titulos8">dó</spam><br>
+              <button id="botao9">523,25 Hz</button><br>
+            </div>
+            <div id="minhaDiv"><h1 class="aviso">Tempo do audio em segundos</h1></div><!--div responsavel pelo texto em inline-block com a div dos botoes-->
+          </div>
+            <button id="gravador">Gravar</button>
+          <script>
+	let botoesBlocos = [];
+
+
+
+//############################################## Dó  ##########################################
+// Função para criar um novo conjunto de formulário e botão de reprodução de áudio
+function criarConjunto() {
+    // Cria um novo ID único para o conjunto
+    const conjuntoID = `conjunto_${botoesBlocos.length}`;
+    // Cria um novo conjunto de elementos
+    const novoConjunto = `
+        <div id="${conjuntoID}">
+            <form>
+                <label class="letrasLabel"for="tempo_${conjuntoID}">261,63 Hz, tempo:</label>
+                <input type="number" id="tempo_${conjuntoID}" name="tempo" min="1" step="1" max="60" required>
+                <button class="botaoSom"type="button" onclick="reproduzirAudio('${conjuntoID}')">Dó</button>
+            </form>
+        </div>
+    `;
+    // Adiciona o novo conjunto à array
+    botoesBlocos.push(novoConjunto);
+    // Atualiza a div minhaDiv com os conjuntos de elementos
+    document.getElementById("minhaDiv").innerHTML = botoesBlocos.join('');
+}
+// Função para reproduzir o áudio associado ao conjunto
+function reproduzirAudio(conjuntoID) {
+    const tempoInput = document.getElementById(`tempo_${conjuntoID}`);
+    const tempo = parseInt(tempoInput.value);
+    // Verifica se o tempo está dentro dos limites especificados
+    if (tempo <= 0 || tempo > 60) {
+        alert("Por favor, insira um tempo entre 1 e 60 segundos.");
+        return; // Sai da função se o tempo estiver fora dos limites
+    }
+    // Cria um novo elemento de áudio
+    const audio = new Audio("./Audio Piano/1_Dó_261p63Hz.mp3");
+    // Define o tempo inicial de reprodução
+    audio.currentTime = 0;
+    // Define o tempo final de reprodução
+    audio.addEventListener("timeupdate", function() {
+        if (audio.currentTime >= tempo) {
+            audio.pause();
+        }
+    });
+    
+    // Reproduz o áudio
+    audio.play();
+}
+// Adiciona um evento de clique ao botão "Criar Botão"
+document.getElementById("botao2").addEventListener("click", function() {
+    criarConjunto();
+});
+//###################################################################################
+
+//#################################### Ré  ###############################################
+function criarConjunto2() {
+    // Cria um novo ID único para o conjunto
+    const conjuntoID2 = `conjunto_${botoesBlocos.length}`;
+    // Cria um novo conjunto de elementos
+    const novoConjunto2 = `
+        <div id="${conjuntoID2}">
+            <form>
+                <label class="letrasLabel"for="tempo2_${conjuntoID2}">293,66 Hz, tempo:</label>
+                <input type="number" id="tempo2_${conjuntoID2}" name="tempo2" min="1" step="1" max="60" required>
+                <button class="botaoSom2"type="button" onclick="reproduzirAudio2('${conjuntoID2}')">Ré</button>
+            </form>
+        </div>
+    `;
+    // Adiciona o novo conjunto à array
+    botoesBlocos.push(novoConjunto2);
+    // Atualiza a div minhaDiv com os conjuntos de elementos
+    document.getElementById("minhaDiv").innerHTML = botoesBlocos.join('');
+}
+// Função para reproduzir o áudio associado ao conjunto
+function reproduzirAudio2(conjuntoID2) {
+    const tempoInput2 = document.getElementById(`tempo2_${conjuntoID2}`);
+    const tempo2 = parseInt(tempoInput2.value);
+    // Verifica se o tempo está dentro dos limites especificados
+    if (tempo2 <= 0 || tempo2 > 60) {
+        alert("Por favor, insira um tempo entre 1 e 60 segundos.");
+        return; // Sai da função se o tempo estiver fora dos limites
+    }
+    // Cria um novo elemento de áudio
+    const audio2 = new Audio("./Audio Piano/2_Ré_293p66Hz.mp3");
+    // Define o tempo inicial de reprodução
+    audio2.currentTime = 0;
+    // Define o tempo final de reprodução
+    audio2.addEventListener("timeupdate", function() {
+        if (audio2.currentTime >= tempo2) {
+            audio2.pause();
+        }
+    });
+    
+    // Reproduz o áudio
+    audio2.play();
+}
+// Adiciona um evento de clique ao botão "Criar Botão"
+document.getElementById("botao3").addEventListener("click", function() {
+    criarConjunto2();
+});
+
+//###################################################################################
+
+//#################################### Mi  ###############################################
+function criarConjunto3() {
+    // Cria um novo ID único para o conjunto
+    const conjuntoID3 = `conjunto_${botoesBlocos.length}`;
+    // Cria um novo conjunto de elementos
+    const novoConjunto3 = `
+        <div id="${conjuntoID3}">
+            <form>
+                <label class="letrasLabel"for="tempo3_${conjuntoID3}">329,63 Hz, tempo:</label>
+                <input type="number" id="tempo3_${conjuntoID3}" name="tempo3" min="1" step="1" max="60" required>
+                <button class="botaoSom3"type="button" onclick="reproduzirAudio3('${conjuntoID3}')">Mi</button>
+            </form>
+        </div>
+    `;
+    // Adiciona o novo conjunto à array
+    botoesBlocos.push(novoConjunto3);
+    // Atualiza a div minhaDiv com os conjuntos de elementos
+    document.getElementById("minhaDiv").innerHTML = botoesBlocos.join('');
+}
+// Função para reproduzir o áudio associado ao conjunto
+function reproduzirAudio3(conjuntoID3) {
+    const tempoInput3 = document.getElementById(`tempo3_${conjuntoID3}`);
+    const tempo3 = parseInt(tempoInput3.value);
+    // Verifica se o tempo está dentro dos limites especificados
+    if (tempo3 <= 0 || tempo3 > 60) {
+        alert("Por favor, insira um tempo entre 1 e 60 segundos.");
+        return; // Sai da função se o tempo estiver fora dos limites
+    }
+    // Cria um novo elemento de áudio
+    const audio3 = new Audio("./Audio Piano/3_Mi_329p63Hz.mp3");
+    // Define o tempo inicial de reprodução
+    audio3.currentTime = 0;
+    // Define o tempo final de reprodução
+    audio3.addEventListener("timeupdate", function() {
+        if (audio3.currentTime >= tempo3) {
+            audio3.pause();
+        }
+    });
+    // Reproduz o áudio
+    audio3.play();
+}
+// Adiciona um evento de clique ao botão "Criar Botão"
+document.getElementById("botao4").addEventListener("click", function() {
+    criarConjunto3();
+});
+
+
+//###################################################################################
+
+//#################################### Fá  ###############################################
+
+function criarConjunto4() {
+    // Cria um novo ID único para o conjunto
+    const conjuntoID4 = `conjunto_${botoesBlocos.length}`;
+    // Cria um novo conjunto de elementos
+    const novoConjunto4 = `
+        <div id="${conjuntoID4}">
+            <form>
+                <label class="letrasLabel"for="tempo4_${conjuntoID4}">349,23 Hz, tempo:</label>
+                <input type="number" id="tempo4_${conjuntoID4}" name="tempo4" min="1" step="1" max="60" required>
+                <button class="botaoSom4"type="button" onclick="reproduzirAudio4('${conjuntoID4}')">Fá</button>
+            </form>
+        </div>
+    `;
+    // Adiciona o novo conjunto à array
+    botoesBlocos.push(novoConjunto4);
+    // Atualiza a div minhaDiv com os conjuntos de elementos
+    document.getElementById("minhaDiv").innerHTML = botoesBlocos.join('');
+}
+// Função para reproduzir o áudio associado ao conjunto
+function reproduzirAudio4(conjuntoID4) {
+    const tempoInput4 = document.getElementById(`tempo4_${conjuntoID4}`);
+    const tempo4 = parseInt(tempoInput4.value);
+    // Verifica se o tempo está dentro dos limites especificados
+    if (tempo4 <= 0 || tempo4 > 60) {
+        alert("Por favor, insira um tempo entre 1 e 60 segundos.");
+        return; // Sai da função se o tempo estiver fora dos limites
+    }
+    // Cria um novo elemento de áudio
+    const audio4 = new Audio("./Audio Piano/4_Fá_349p23Hz.mp3");
+    // Define o tempo inicial de reprodução
+    audio4.currentTime = 0;
+    // Define o tempo final de reprodução
+    audio4.addEventListener("timeupdate", function() {
+        if (audio4.currentTime >= tempo4) {
+            audio4.pause();
+        }
+    });
+    // Reproduz o áudio
+    audio4.play();
+}
+// Adiciona um evento de clique ao botão "Criar Botão"
+document.getElementById("botao5").addEventListener("click", function() {
+    criarConjunto4();
+});
+
+//###################################################################################
+
+//#################################### Sol  ###############################################
+
+function criarConjunto5() {
+    // Cria um novo ID único para o conjunto
+    const conjuntoID5 = `conjunto_${botoesBlocos.length}`;
+    // Cria um novo conjunto de elementos
+    const novoConjunto5 = `
+        <div id="${conjuntoID5}">
+            <form>
+                <label class="letrasLabel"for="tempo5_${conjuntoID5}">392,00 Hz, tempo:</label>
+                <input type="number" id="tempo5_${conjuntoID5}" name="tempo5" min="1" step="1" max="60" required>
+                <button class="botaoSom5"type="button" onclick="reproduzirAudio5('${conjuntoID5}')">Sol</button>
+            </form>
+        </div>
+    `;
+    // Adiciona o novo conjunto à array
+    botoesBlocos.push(novoConjunto5);
+    // Atualiza a div minhaDiv com os conjuntos de elementos
+    document.getElementById("minhaDiv").innerHTML = botoesBlocos.join('');
+}
+// Função para reproduzir o áudio associado ao conjunto
+function reproduzirAudio5(conjuntoID5) {
+    const tempoInput5 = document.getElementById(`tempo5_${conjuntoID5}`);
+    const tempo5 = parseInt(tempoInput5.value);
+    // Verifica se o tempo está dentro dos limites especificados
+    if (tempo5 <= 0 || tempo5 > 60) {
+        alert("Por favor, insira um tempo entre 1 e 60 segundos.");
+        return; // Sai da função se o tempo estiver fora dos limites
+    }
+    // Cria um novo elemento de áudio
+    const audio5 = new Audio("./Audio Piano/5_Sol_392Hz.mp3");
+    // Define o tempo inicial de reprodução
+    audio5.currentTime = 0;
+    // Define o tempo final de reprodução
+    audio5.addEventListener("timeupdate", function() {
+        if (audio5.currentTime >= tempo5) {
+            audio5.pause();
+        }
+    });
+    // Reproduz o áudio
+    audio5.play();
+}
+// Adiciona um evento de clique ao botão "Criar Botão"
+document.getElementById("botao6").addEventListener("click", function() {
+    criarConjunto5();
+});
+
+
+//###################################################################################
+
+//#################################### Lá  ###############################################
+function criarConjunto6() {
+    // Cria um novo ID único para o conjunto
+    const conjuntoID6 = `conjunto_${botoesBlocos.length}`;
+    // Cria um novo conjunto de elementos
+    const novoConjunto6 = `
+        <div id="${conjuntoID6}">
+            <form>
+                <label class="letrasLabel"for="tempo6_${conjuntoID6}">440,00 Hz, tempo:</label>
+                <input type="number" id="tempo6_${conjuntoID6}" name="tempo6" min="1" step="1" max="60" required>
+                <button class="botaoSom6"type="button" onclick="reproduzirAudio6('${conjuntoID6}')">Lá</button>
+            </form>
+        </div>
+    `;
+    // Adiciona o novo conjunto à array
+    botoesBlocos.push(novoConjunto6);
+    // Atualiza a div minhaDiv com os conjuntos de elementos
+    document.getElementById("minhaDiv").innerHTML = botoesBlocos.join('');
+}
+// Função para reproduzir o áudio associado ao conjunto
+function reproduzirAudio6(conjuntoID6) {
+    const tempoInput6 = document.getElementById(`tempo6_${conjuntoID6}`);
+    const tempo6 = parseInt(tempoInput6.value);
+    // Verifica se o tempo está dentro dos limites especificados
+    if (tempo6 <= 0 || tempo6 > 60) {
+        alert("Por favor, insira um tempo entre 1 e 60 segundos.");
+        return; // Sai da função se o tempo estiver fora dos limites
+    }
+    // Cria um novo elemento de áudio
+    const audio6 = new Audio("./Audio Piano/6_Lá_440Hz.mp3");
+    // Define o tempo inicial de reprodução
+    audio6.currentTime = 0;
+    // Define o tempo final de reprodução
+    audio6.addEventListener("timeupdate", function() {
+        if (audio6.currentTime >= tempo6) {
+            audio6.pause();
+        }
+    });
+    // Reproduz o áudio
+    audio6.play();
+}
+// Adiciona um evento de clique ao botão "Criar Botão"
+document.getElementById("botao7").addEventListener("click", function() {
+    criarConjunto6();
+});
+
+
+//###################################################################################
+
+//#################################### Sí  ###############################################
+function criarConjunto7() {
+    // Cria um novo ID único para o conjunto
+    const conjuntoID7 = `conjunto_${botoesBlocos.length}`;
+    // Cria um novo conjunto de elementos
+    const novoConjunto7 = `
+        <div id="${conjuntoID7}">
+            <form>
+                <label class="letrasLabel"for="tempo7_${conjuntoID7}">493,88 Hz, tempo:</label>
+                <input type="number" id="tempo7_${conjuntoID7}" name="tempo7" min="1" step="1" max="60" required>
+                <button class="botaoSom7"type="button" onclick="reproduzirAudio7('${conjuntoID7}')">Sí</button>
+            </form>
+        </div>
+    `;
+    // Adiciona o novo conjunto à array
+    botoesBlocos.push(novoConjunto7);
+    // Atualiza a div minhaDiv com os conjuntos de elementos
+    document.getElementById("minhaDiv").innerHTML = botoesBlocos.join('');
+}
+// Função para reproduzir o áudio associado ao conjunto
+function reproduzirAudio7(conjuntoID7) {
+    const tempoInput7 = document.getElementById(`tempo7_${conjuntoID7}`);
+    const tempo7 = parseInt(tempoInput7.value);
+    // Verifica se o tempo está dentro dos limites especificados
+    if (tempo7 <= 0 || tempo7 > 60) {
+        alert("Por favor, insira um tempo entre 1 e 60 segundos.");
+        return; // Sai da função se o tempo estiver fora dos limites
+    }
+    // Cria um novo elemento de áudio
+    const audio7 = new Audio("./Audio Piano/7_Sí_493p88Hz.mp3");
+    // Define o tempo inicial de reprodução
+    audio7.currentTime = 0;
+    // Define o tempo final de reprodução
+    audio7.addEventListener("timeupdate", function() {
+        if (audio7.currentTime >= tempo7) {
+            audio7.pause();
+        }
+    });
+    // Reproduz o áudio
+    audio7.play();
+}
+// Adiciona um evento de clique ao botão "Criar Botão"
+document.getElementById("botao8").addEventListener("click", function() {
+    criarConjunto7();
+});
+
+
+//###################################################################################
+
+//#################################### dó  ###############################################
+function criarConjunto8() {
+    // Cria um novo ID único para o conjunto
+    const conjuntoID8 = `conjunto_${botoesBlocos.length}`;
+    // Cria um novo conjunto de elementos
+    const novoConjunto8 = `
+        <div id="${conjuntoID8}">
+            <form>
+                <label class="letrasLabel"for="tempo8_${conjuntoID8}">523,25 Hz, tempo:</label>
+                <input type="number" id="tempo8_${conjuntoID8}" name="tempo8" min="1" step="1" max="60" required>
+                <button class="botaoSom8"type="button" onclick="reproduzirAudio8('${conjuntoID8}')">dó</button>
+            </form>
+        </div>
+    `;
+    // Adiciona o novo conjunto à array
+    botoesBlocos.push(novoConjunto8);
+    // Atualiza a div minhaDiv com os conjuntos de elementos
+    document.getElementById("minhaDiv").innerHTML = botoesBlocos.join('');
+}
+// Função para reproduzir o áudio associado ao conjunto
+function reproduzirAudio8(conjuntoID8) {
+    const tempoInput8 = document.getElementById(`tempo8_${conjuntoID8}`);
+    const tempo8 = parseInt(tempoInput8.value);
+    // Verifica se o tempo está dentro dos limites especificados
+    if (tempo8 <= 0 || tempo8 > 60) {
+        alert("Por favor, insira um tempo entre 1 e 60 segundos.");
+        return; // Sai da função se o tempo estiver fora dos limites
+    }
+    // Cria um novo elemento de áudio
+    const audio8 = new Audio("./Audio Piano/8_dó_523p25.mp3");
+    // Define o tempo inicial de reprodução
+    audio8.currentTime = 0;
+    // Define o tempo final de reprodução
+    audio8.addEventListener("timeupdate", function() {
+        if (audio8.currentTime >= tempo8) {
+            audio8.pause();
+        }
+    });
+    // Reproduz o áudio
+    audio8.play();
+}
+// Adiciona um evento de clique ao botão "Criar Botão"
+document.getElementById("botao9").addEventListener("click", function() {
+    criarConjunto8();
+});
+
+
+//###################################################################################
+
+//============================= Botao apagar =====================
+
+// Adiciona um evento de clique ao botão "Apagar Último Botão"
+document.getElementById("botaoApagar1").addEventListener("click", function() {
+// Verifica se há elementos na array
+if (botoesBlocos.length > 0) {
+// Remove o último conjunto de elementos da array
+botoesBlocos.pop();
+
+// Atualiza a div minhaDiv com os conjuntos de elementos atualizados
+document.getElementById("minhaDiv").innerHTML = botoesBlocos.join('');
+
+
+}
+});
+
+
+
+
+//################################ sobre os botões de texto #################
+let linhasDeTexto = [];
+// adiciona ouvintes de evento de clique aos botões
+mensagem.addEventListener("click", function() {
+    // adiciona o texto ao array, juntamente com o índice da linha
+    linhasDeTexto.push({texto: ("console.log('O programador Rafael Silva diz:Bons estudos para todos!<br>espero que este programa possa ajudar todos que precisarem de uma ferramenta<br>de manipulação de frequências sonoras. O uso é simples e instintivo,<br>basta clicar nas notas musicais, e preencher os formulários de tempo e<br>salvar as sequencias de notas clicando no botão gravar!<br>A frequência gerada pode ser ouvida clicando no botão gerado no formulário,<br>o botão Break sound serve para parar a execução de audios que estão sendo ouvidos.<br>Você poderá montar uma sequência lógica de blocos para <br>gravar em um pendrive e usar no seu xR_duíno! <br>Além dos botões das notas,ouvir frequência,break sound e gravar <br>existe o botão apagar blocos, que serve para apagar sequências criadas!<br>este programa ainda precisa de muitas<br>atualizações e melhorias!! mas acredito que um bom estudante poderá<br>superar as falhas dessa versão inicial,<br>deixei um repositório público no git hub!!<br>espero vocês por lá!! deixem seus comentários e opniões!!<br>Agora clique em apagar e boa sorte!"), indice: linhasDeTexto.length});
+    // atualiza o conteúdo da div
+    atualizarDiv();
+  });//hello do programador
+  // adiciona ouvintes de evento de clique aos botões
+  botao1.addEventListener("click", function() {
+    // adiciona o texto ao array, juntamente com o índice da linha
+    linhasDeTexto.push({texto: ("O QUE É O xR_duíno???<br>Pode se dizer que é um Arduino caseiro feito com qualquer caixinha de som, com leitor de pendrive,<br>um pendrive, e um drive na configuração de relé sônica...<br>LÓGICA:<br>No pendrive,grava-se as notas musicais em suas devidas frequências, no formato mp3.<br>Ao reproduzir as notas musicais na caixa de som o fone deverá ser removido(ou não),<br>para que as ondas das frequências do pendrive com as gravações de audio<br>sejam usadas para manipular outros circuitos...<br>Driver de relé sônica deve ser configurado para manipulações de aparelhos ou mesmo portas lógicas... etc...<br>Considerando que a configuração de hardware funcione perfeitamente <br>a ideia seguinte será programar os audios na IDE de manipulação de dados para facilitar o manuseio de comandos...<br>Dentro da lógica de programação em blocos, A IDE deve fornecer um menu de audios,<br>nas devidas frequências em formato mp3 para serem organizados numa area de trabalho,<br>possibilitando tambem gravações de audio. Ao organizar a sequência de audios em frequencias desejadas<br>a mesma deve ser salva no pendrive para ser executado no xR_duíno.<br>Esta Tecnologia é nova no mercado, portanto drivers plug and play para dispositivos<br>sonoros ainda não estão acessiveis no mercado restando<br>as alternativas de importação do drive ou mesmo a fabricação do mesmo!!<br>No momento a lightPage informa que a tecnologia ainda está na fase da prototipagem,<br>no entanto estamos abertos a comentários e sugestões e possiveis negociações..."), indice: linhasDeTexto.length});
+    // atualiza o conteúdo da div
+    atualizarDiv();
+  });//hello world
+const botaoApagarLinha = document.querySelector("#botaoApagar1");
+// seleciona a div pelo ID
+const minhaDiv = document.querySelector("#minhaDiv");
+ botaoApagarLinha.addEventListener("click", function() {
+    // verifica se há linhas de texto
+    if (linhasDeTexto.length > 0) {
+      // remove a última linha do array
+      linhasDeTexto.splice(linhasDeTexto.length - 1, 1);
+      // atualiza o conteúdo da div
+      atualizarDiv();
+    }
+  });
+  // função para atualizar o conteúdo da div
+  function atualizarDiv() {
+    // define o conteúdo da div como vazio
+    minhaDiv.innerHTML = "";
+    // itera sobre o array de linhas de texto, do último para o primeiro
+    for (let i = linhasDeTexto.length - 1; i >= 0; i--) {
+      // adiciona cada linha de texto à div, com uma quebra de linha
+      minhaDiv.innerHTML += linhasDeTexto[i].texto + "<br>";
+    }
+  }
+
+ //=========== relativo a modificação na função parar som, que no momento funciona atualizando a página...
+
+// Adiciona um evento de clique ao botão "Criar Botão"
+document.getElementById("botaoParar").addEventListener("click", function() {
+    window.location.reload();
+});
+
+	
+	  </script>
+</body>
+</html>
