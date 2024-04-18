@@ -87,12 +87,12 @@ display: inline-block;
     #meusBotoes {
         display: inline-block;/*define formato e cores para a box e conteudo dos botões*/
         vertical-align: top;
-        margin-right: 250px;/*define a distancia entre as divs*/
+        margin-right: 100px;/*define a distancia entre as divs*/
         overflow-y: auto;/* sobre a barra de rolagem */
         height: 450px; /* ou qualquer outra altura desejada */
       }
       #minhaDiv {
-        width: 50px;
+        width:300px;
         height: 500px;
         display: inline-block;
         vertical-align: top;
@@ -103,7 +103,7 @@ display: inline-block;
       
       }
       #minhaDivTexto {
-        margin-right: 100px;
+        /*margin-right: 10px;*/
         width: 450px;
         height: 500px;
         display: inline-block;
