@@ -433,7 +433,7 @@ mensagem.addEventListener("click", function() {
   });//hello world
 const botaoApagarLinha = document.querySelector("#botaoApagar1");
 // seleciona a div pelo ID
-const minhaDiv = document.querySelector("#minhaDiv");
+const minhaDivTexto = document.querySelector("#minhaDivTexto");
  botaoApagarLinha.addEventListener("click", function() {
     // verifica se há linhas de texto
     if (linhasDeTexto.length > 0) {
@@ -446,11 +446,11 @@ const minhaDiv = document.querySelector("#minhaDiv");
   // função para atualizar o conteúdo da div
   function atualizarDiv() {
     // define o conteúdo da div como vazio
-    minhaDiv.innerHTML = "";
+    minhaDivTexto.innerHTML = "";
     // itera sobre o array de linhas de texto, do último para o primeiro
     for (let i = linhasDeTexto.length - 1; i >= 0; i--) {
       // adiciona cada linha de texto à div, com uma quebra de linha
-      minhaDiv.innerHTML += linhasDeTexto[i].texto + "<br>";
+      minhaDivTexto.innerHTML += linhasDeTexto[i].texto + "<br>";
     }
   }
 
