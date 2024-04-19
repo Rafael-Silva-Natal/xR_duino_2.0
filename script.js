@@ -3,6 +3,11 @@ let botoesBlocos = [];
 
 
 
+// Array para armazenar referências aos elementos de áudio gerados dinamicamente
+var audiosGerados = [];
+
+let audioEmExecucao = false; // Adicione essa variável fora das funções
+
 //############################################## Dó  ##########################################
 // Função para criar um novo conjunto de formulário e botão de reprodução de áudio
 function criarConjunto() {
@@ -11,10 +16,10 @@ function criarConjunto() {
     // Cria um novo conjunto de elementos
     const novoConjunto = `
         <div id="${conjuntoID}">
-            <form>
-                <label class="letrasLabel"for="tempo_${conjuntoID}">261,63 Hz, tempo:</label>
+            <form id="form_${conjuntoID}">
+                <label class="letrasLabel" for="tempo_${conjuntoID}">261,63 Hz, tempo:</label>
                 <input type="number" id="tempo_${conjuntoID}" name="tempo" min="1" step="1" max="60" required>
-                <button class="botaoSom"type="button" onclick="reproduzirAudio('${conjuntoID}')">Dó</button>
+                <button class="botaoSom" type="button" onclick="reproduzirAudio('${conjuntoID}')">Dó</button>
             </form>
         </div>
     `;
@@ -22,7 +27,11 @@ function criarConjunto() {
     botoesBlocos.push(novoConjunto);
     // Atualiza a div minhaDiv com os conjuntos de elementos
     document.getElementById("minhaDiv").innerHTML = botoesBlocos.join('');
+
+    // Adiciona uma quebra de linha após cada conjunto
+    document.getElementById("minhaDiv").appendChild(document.createElement("br"));
 }
+
 // Função para reproduzir o áudio associado ao conjunto
 function reproduzirAudio(conjuntoID) {
     const tempoInput = document.getElementById(`tempo_${conjuntoID}`);
@@ -32,20 +41,38 @@ function reproduzirAudio(conjuntoID) {
         alert("Por favor, insira um tempo entre 1 e 60 segundos.");
         return; // Sai da função se o tempo estiver fora dos limites
     }
-    // Cria um novo elemento de áudio
-    const audio = new Audio("./Audio Piano/1_Dó_261p63Hz.mp3");
-    // Define o tempo inicial de reprodução
-    audio.currentTime = 0;
-    // Define o tempo final de reprodução
-    audio.addEventListener("timeupdate", function() {
-        if (audio.currentTime >= tempo) {
-            audio.pause();
-        }
-    });
-    
-    // Reproduz o áudio
-    audio.play();
+    const form = document.getElementById(`form_${conjuntoID}`);
+    // Verifica se o formulário está preenchido
+    if (!form.checkValidity()) {
+        form.reportValidity();
+        return; // Sai da função se o formulário não estiver válido
+    }
+    // Verifica se há algum áudio em execução
+    if (!audiosGerados.length || audiosGerados.every(audio => audio.paused)) {
+        // Cria um novo elemento de áudio
+        const audio = new Audio("./Audio Piano/1_Dó_261p63Hz.mp3");
+        // Define o tempo inicial de reprodução
+        audio.currentTime = 0;
+        // Define o tempo final de reprodução
+        audio.addEventListener("timeupdate", function() {
+            if (audio.currentTime >= tempo) {
+                audio.pause();
+            }
+        });
+        // Reproduz o áudio
+        audio.play();
+        // Adiciona o áudio ao array de áudios gerados
+        audiosGerados.push(audio);
+        // Adiciona um evento de fim de reprodução para remover o áudio do array
+        audio.addEventListener("ended", function() {
+            const index = audiosGerados.indexOf(audio);
+            if (index !== -1) {
+                audiosGerados.splice(index, 1);
+            }
+        });
+    }
 }
+
 // Adiciona um evento de clique ao botão "Criar Botão"
 document.getElementById("botao2").addEventListener("click", function() {
     criarConjunto();
