@@ -484,7 +484,24 @@ const minhaDivTexto = document.querySelector("#minhaDivTexto");
  //=========== relativo a modificação na função parar som, que no momento funciona atualizando a página...
 
 // Adiciona um evento de clique ao botão "Criar Botão"
+/*
 document.getElementById("botaoParar").addEventListener("click", function() {
     window.location.reload();
 });
+*/
 
+//================================parar audios===============================
+// Função para parar todos os áudios em reprodução
+function pararTodosOsAudios() {
+    // Itera sobre cada elemento de áudio gerado e para sua reprodução
+    audiosGerados.forEach(function(audio) {
+        audio.pause(); // Pausa a reprodução do áudio
+        audio.currentTime = 0; // Define o tempo de reprodução como zero para reiniciar o áudio, se necessário
+    });
+  }
+  // Adiciona um evento de clique ao botão "botaoParar"
+  document.getElementById("botaoParar").addEventListener("click", function() {
+    pararTodosOsAudios(); // Chama a função para parar todos os áudios
+    audioEmExecucao = false;
+  });
+  //=============================================================================
