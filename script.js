@@ -157,10 +157,10 @@ function criarConjunto3() {
     // Cria um novo conjunto de elementos
     const novoConjunto3 = `
         <div id="${conjuntoID3}">
-            <form>
-                <label class="letrasLabel"for="tempo3_${conjuntoID3}">329,63 Hz, tempo:</label>
+            <form id="form3_${conjuntoID3}">
+                <label class="letrasLabel" for="tempo3_${conjuntoID3}">261,63 Hz, tempo:</label>
                 <input type="number" id="tempo3_${conjuntoID3}" name="tempo3" min="1" step="1" max="60" required>
-                <button class="botaoSom3"type="button" onclick="reproduzirAudio3('${conjuntoID3}')">Mi</button>
+                <button class="botaoSom3" type="button" onclick="reproduzirAudio3('${conjuntoID3}')">Ré</button>
             </form>
         </div>
     `;
@@ -168,7 +168,11 @@ function criarConjunto3() {
     botoesBlocos.push(novoConjunto3);
     // Atualiza a div minhaDiv com os conjuntos de elementos
     document.getElementById("minhaDiv").innerHTML = botoesBlocos.join('');
+
+    // Adiciona uma quebra de linha após cada conjunto
+    document.getElementById("minhaDiv").appendChild(document.createElement("br"));
 }
+
 // Função para reproduzir o áudio associado ao conjunto
 function reproduzirAudio3(conjuntoID3) {
     const tempoInput3 = document.getElementById(`tempo3_${conjuntoID3}`);
@@ -178,19 +182,38 @@ function reproduzirAudio3(conjuntoID3) {
         alert("Por favor, insira um tempo entre 1 e 60 segundos.");
         return; // Sai da função se o tempo estiver fora dos limites
     }
-    // Cria um novo elemento de áudio
-    const audio3 = new Audio("./Audio Piano/3_Mi_329p63Hz.mp3");
-    // Define o tempo inicial de reprodução
-    audio3.currentTime = 0;
-    // Define o tempo final de reprodução
-    audio3.addEventListener("timeupdate", function() {
-        if (audio3.currentTime >= tempo3) {
-            audio3.pause();
-        }
-    });
-    // Reproduz o áudio
-    audio3.play();
+    const form3 = document.getElementById(`form3_${conjuntoID3}`);
+    // Verifica se o formulário está preenchido
+    if (!form3.checkValidity()) {
+        form3.reportValidity();
+        return; // Sai da função se o formulário não estiver válido
+    }
+    // Verifica se há algum áudio em execução
+    if (!audiosGerados.length || audiosGerados.every(audio => audio.paused)) {
+        // Cria um novo elemento de áudio
+        const audio3 = new Audio("./Audio Piano/3_Mi_329p63Hz.mp3");
+        // Define o tempo inicial de reprodução
+        audio3.currentTime = 0;
+        // Define o tempo final de reprodução
+        audio3.addEventListener("timeupdate", function() {
+            if (audio3.currentTime >= tempo3) {
+                audio3.pause();
+            }
+        });
+        // Reproduz o áudio
+        audio3.play();
+        // Adiciona o áudio ao array de áudios gerados
+        audiosGerados.push(audio3);
+        // Adiciona um evento de fim de reprodução para remover o áudio do array
+        audio3.addEventListener("ended", function() {
+            const index3 = audiosGerados.indexOf(audio3);
+            if (index3 !== -1) {
+                audiosGerados.splice(index3, 1);
+            }
+        });
+    }
 }
+
 // Adiciona um evento de clique ao botão "Criar Botão"
 document.getElementById("botao4").addEventListener("click", function() {
     criarConjunto3();
