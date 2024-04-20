@@ -86,10 +86,10 @@ function criarConjunto2() {
     // Cria um novo conjunto de elementos
     const novoConjunto2 = `
         <div id="${conjuntoID2}">
-            <form>
-                <label class="letrasLabel"for="tempo2_${conjuntoID2}">293,66 Hz, tempo:</label>
+            <form id="form2_${conjuntoID2}">
+                <label class="letrasLabel" for="tempo2_${conjuntoID2}">261,63 Hz, tempo:</label>
                 <input type="number" id="tempo2_${conjuntoID2}" name="tempo2" min="1" step="1" max="60" required>
-                <button class="botaoSom2"type="button" onclick="reproduzirAudio2('${conjuntoID2}')">Ré</button>
+                <button class="botaoSom2" type="button" onclick="reproduzirAudio2('${conjuntoID2}')">Ré</button>
             </form>
         </div>
     `;
@@ -97,7 +97,11 @@ function criarConjunto2() {
     botoesBlocos.push(novoConjunto2);
     // Atualiza a div minhaDiv com os conjuntos de elementos
     document.getElementById("minhaDiv").innerHTML = botoesBlocos.join('');
+
+    // Adiciona uma quebra de linha após cada conjunto
+    document.getElementById("minhaDiv").appendChild(document.createElement("br"));
 }
+
 // Função para reproduzir o áudio associado ao conjunto
 function reproduzirAudio2(conjuntoID2) {
     const tempoInput2 = document.getElementById(`tempo2_${conjuntoID2}`);
@@ -107,20 +111,38 @@ function reproduzirAudio2(conjuntoID2) {
         alert("Por favor, insira um tempo entre 1 e 60 segundos.");
         return; // Sai da função se o tempo estiver fora dos limites
     }
-    // Cria um novo elemento de áudio
-    const audio2 = new Audio("./Audio Piano/2_Ré_293p66Hz.mp3");
-    // Define o tempo inicial de reprodução
-    audio2.currentTime = 0;
-    // Define o tempo final de reprodução
-    audio2.addEventListener("timeupdate", function() {
-        if (audio2.currentTime >= tempo2) {
-            audio2.pause();
-        }
-    });
-    
-    // Reproduz o áudio
-    audio2.play();
+    const form2 = document.getElementById(`form2_${conjuntoID2}`);
+    // Verifica se o formulário está preenchido
+    if (!form2.checkValidity()) {
+        form2.reportValidity();
+        return; // Sai da função se o formulário não estiver válido
+    }
+    // Verifica se há algum áudio em execução
+    if (!audiosGerados.length || audiosGerados.every(audio => audio.paused)) {
+        // Cria um novo elemento de áudio
+        const audio2 = new Audio("./Audio Piano/2_Ré_293p66Hz.mp3");
+        // Define o tempo inicial de reprodução
+        audio2.currentTime = 0;
+        // Define o tempo final de reprodução
+        audio2.addEventListener("timeupdate", function() {
+            if (audio2.currentTime >= tempo2) {
+                audio2.pause();
+            }
+        });
+        // Reproduz o áudio
+        audio2.play();
+        // Adiciona o áudio ao array de áudios gerados
+        audiosGerados.push(audio2);
+        // Adiciona um evento de fim de reprodução para remover o áudio do array
+        audio2.addEventListener("ended", function() {
+            const index2 = audiosGerados.indexOf(audio2);
+            if (index2 !== -1) {
+                audiosGerados.splice(index2, 1);
+            }
+        });
+    }
 }
+
 // Adiciona um evento de clique ao botão "Criar Botão"
 document.getElementById("botao3").addEventListener("click", function() {
     criarConjunto2();
@@ -481,14 +503,6 @@ const minhaDivTexto = document.querySelector("#minhaDivTexto");
     }
   }
 
- //=========== relativo a modificação na função parar som, que no momento funciona atualizando a página...
-
-// Adiciona um evento de clique ao botão "Criar Botão"
-/*
-document.getElementById("botaoParar").addEventListener("click", function() {
-    window.location.reload();
-});
-*/
 
 //================================parar audios===============================
 // Função para parar todos os áudios em reprodução
