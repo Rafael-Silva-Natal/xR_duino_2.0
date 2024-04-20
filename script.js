@@ -87,7 +87,7 @@ function criarConjunto2() {
     const novoConjunto2 = `
         <div id="${conjuntoID2}">
             <form id="form2_${conjuntoID2}">
-                <label class="letrasLabel" for="tempo2_${conjuntoID2}">261,63 Hz, tempo:</label>
+                <label class="letrasLabel" for="tempo2_${conjuntoID2}">293,66 Hz, tempo:</label>
                 <input type="number" id="tempo2_${conjuntoID2}" name="tempo2" min="1" step="1" max="60" required>
                 <button class="botaoSom2" type="button" onclick="reproduzirAudio2('${conjuntoID2}')">Ré</button>
             </form>
@@ -158,9 +158,9 @@ function criarConjunto3() {
     const novoConjunto3 = `
         <div id="${conjuntoID3}">
             <form id="form3_${conjuntoID3}">
-                <label class="letrasLabel" for="tempo3_${conjuntoID3}">261,63 Hz, tempo:</label>
+                <label class="letrasLabel" for="tempo3_${conjuntoID3}">329,63 Hz, tempo:</label>
                 <input type="number" id="tempo3_${conjuntoID3}" name="tempo3" min="1" step="1" max="60" required>
-                <button class="botaoSom3" type="button" onclick="reproduzirAudio3('${conjuntoID3}')">Ré</button>
+                <button class="botaoSom3" type="button" onclick="reproduzirAudio3('${conjuntoID3}')">Mi</button>
             </form>
         </div>
     `;
@@ -230,10 +230,10 @@ function criarConjunto4() {
     // Cria um novo conjunto de elementos
     const novoConjunto4 = `
         <div id="${conjuntoID4}">
-            <form>
-                <label class="letrasLabel"for="tempo4_${conjuntoID4}">349,23 Hz, tempo:</label>
+            <form id="form4_${conjuntoID4}">
+                <label class="letrasLabel" for="tempo4_${conjuntoID4}">349,23 Hz, tempo:</label>
                 <input type="number" id="tempo4_${conjuntoID4}" name="tempo4" min="1" step="1" max="60" required>
-                <button class="botaoSom4"type="button" onclick="reproduzirAudio4('${conjuntoID4}')">Fá</button>
+                <button class="botaoSom4" type="button" onclick="reproduzirAudio4('${conjuntoID4}')">Fá</button>
             </form>
         </div>
     `;
@@ -241,7 +241,11 @@ function criarConjunto4() {
     botoesBlocos.push(novoConjunto4);
     // Atualiza a div minhaDiv com os conjuntos de elementos
     document.getElementById("minhaDiv").innerHTML = botoesBlocos.join('');
+
+    // Adiciona uma quebra de linha após cada conjunto
+    document.getElementById("minhaDiv").appendChild(document.createElement("br"));
 }
+
 // Função para reproduzir o áudio associado ao conjunto
 function reproduzirAudio4(conjuntoID4) {
     const tempoInput4 = document.getElementById(`tempo4_${conjuntoID4}`);
@@ -251,23 +255,43 @@ function reproduzirAudio4(conjuntoID4) {
         alert("Por favor, insira um tempo entre 1 e 60 segundos.");
         return; // Sai da função se o tempo estiver fora dos limites
     }
-    // Cria um novo elemento de áudio
-    const audio4 = new Audio("./Audio Piano/4_Fá_349p23Hz.mp3");
-    // Define o tempo inicial de reprodução
-    audio4.currentTime = 0;
-    // Define o tempo final de reprodução
-    audio4.addEventListener("timeupdate", function() {
-        if (audio4.currentTime >= tempo4) {
-            audio4.pause();
-        }
-    });
-    // Reproduz o áudio
-    audio4.play();
+    const form4 = document.getElementById(`form4_${conjuntoID4}`);
+    // Verifica se o formulário está preenchido
+    if (!form4.checkValidity()) {
+        form4.reportValidity();
+        return; // Sai da função se o formulário não estiver válido
+    }
+    // Verifica se há algum áudio em execução
+    if (!audiosGerados.length || audiosGerados.every(audio => audio.paused)) {
+        // Cria um novo elemento de áudio
+        const audio4 = new Audio("./Audio Piano/4_Fá_349p23Hz.mp3");
+        // Define o tempo inicial de reprodução
+        audio4.currentTime = 0;
+        // Define o tempo final de reprodução
+        audio4.addEventListener("timeupdate", function() {
+            if (audio4.currentTime >= tempo4) {
+                audio4.pause();
+            }
+        });
+        // Reproduz o áudio
+        audio4.play();
+        // Adiciona o áudio ao array de áudios gerados
+        audiosGerados.push(audio4);
+        // Adiciona um evento de fim de reprodução para remover o áudio do array
+        audio4.addEventListener("ended", function() {
+            const index4 = audiosGerados.indexOf(audio4);
+            if (index4 !== -1) {
+                audiosGerados.splice(index4, 1);
+            }
+        });
+    }
 }
+
 // Adiciona um evento de clique ao botão "Criar Botão"
 document.getElementById("botao5").addEventListener("click", function() {
     criarConjunto4();
 });
+
 
 //###################################################################################
 
@@ -279,10 +303,10 @@ function criarConjunto5() {
     // Cria um novo conjunto de elementos
     const novoConjunto5 = `
         <div id="${conjuntoID5}">
-            <form>
-                <label class="letrasLabel"for="tempo5_${conjuntoID5}">392,00 Hz, tempo:</label>
+            <form id="form5_${conjuntoID5}">
+                <label class="letrasLabel" for="tempo5_${conjuntoID5}">392,00 Hz, tempo:</label>
                 <input type="number" id="tempo5_${conjuntoID5}" name="tempo5" min="1" step="1" max="60" required>
-                <button class="botaoSom5"type="button" onclick="reproduzirAudio5('${conjuntoID5}')">Sol</button>
+                <button class="botaoSom5" type="button" onclick="reproduzirAudio5('${conjuntoID5}')">Sol</button>
             </form>
         </div>
     `;
@@ -290,7 +314,11 @@ function criarConjunto5() {
     botoesBlocos.push(novoConjunto5);
     // Atualiza a div minhaDiv com os conjuntos de elementos
     document.getElementById("minhaDiv").innerHTML = botoesBlocos.join('');
+
+    // Adiciona uma quebra de linha após cada conjunto
+    document.getElementById("minhaDiv").appendChild(document.createElement("br"));
 }
+
 // Função para reproduzir o áudio associado ao conjunto
 function reproduzirAudio5(conjuntoID5) {
     const tempoInput5 = document.getElementById(`tempo5_${conjuntoID5}`);
@@ -300,19 +328,38 @@ function reproduzirAudio5(conjuntoID5) {
         alert("Por favor, insira um tempo entre 1 e 60 segundos.");
         return; // Sai da função se o tempo estiver fora dos limites
     }
-    // Cria um novo elemento de áudio
-    const audio5 = new Audio("./Audio Piano/5_Sol_392Hz.mp3");
-    // Define o tempo inicial de reprodução
-    audio5.currentTime = 0;
-    // Define o tempo final de reprodução
-    audio5.addEventListener("timeupdate", function() {
-        if (audio5.currentTime >= tempo5) {
-            audio5.pause();
-        }
-    });
-    // Reproduz o áudio
-    audio5.play();
+    const form5 = document.getElementById(`form5_${conjuntoID5}`);
+    // Verifica se o formulário está preenchido
+    if (!form5.checkValidity()) {
+        form5.reportValidity();
+        return; // Sai da função se o formulário não estiver válido
+    }
+    // Verifica se há algum áudio em execução
+    if (!audiosGerados.length || audiosGerados.every(audio => audio.paused)) {
+        // Cria um novo elemento de áudio
+        const audio5 = new Audio("./Audio Piano/5_Sol_392Hz.mp3");
+        // Define o tempo inicial de reprodução
+        audio5.currentTime = 0;
+        // Define o tempo final de reprodução
+        audio5.addEventListener("timeupdate", function() {
+            if (audio5.currentTime >= tempo5) {
+                audio5.pause();
+            }
+        });
+        // Reproduz o áudio
+        audio5.play();
+        // Adiciona o áudio ao array de áudios gerados
+        audiosGerados.push(audio5);
+        // Adiciona um evento de fim de reprodução para remover o áudio do array
+        audio5.addEventListener("ended", function() {
+            const index5 = audiosGerados.indexOf(audio5);
+            if (index5 !== -1) {
+                audiosGerados.splice(index5, 1);
+            }
+        });
+    }
 }
+
 // Adiciona um evento de clique ao botão "Criar Botão"
 document.getElementById("botao6").addEventListener("click", function() {
     criarConjunto5();
@@ -328,10 +375,10 @@ function criarConjunto6() {
     // Cria um novo conjunto de elementos
     const novoConjunto6 = `
         <div id="${conjuntoID6}">
-            <form>
-                <label class="letrasLabel"for="tempo6_${conjuntoID6}">440,00 Hz, tempo:</label>
+            <form id="form6_${conjuntoID6}">
+                <label class="letrasLabel" for="tempo6_${conjuntoID6}">440,00 Hz, tempo:</label>
                 <input type="number" id="tempo6_${conjuntoID6}" name="tempo6" min="1" step="1" max="60" required>
-                <button class="botaoSom6"type="button" onclick="reproduzirAudio6('${conjuntoID6}')">Lá</button>
+                <button class="botaoSom6" type="button" onclick="reproduzirAudio6('${conjuntoID6}')">Lá</button>
             </form>
         </div>
     `;
@@ -339,7 +386,11 @@ function criarConjunto6() {
     botoesBlocos.push(novoConjunto6);
     // Atualiza a div minhaDiv com os conjuntos de elementos
     document.getElementById("minhaDiv").innerHTML = botoesBlocos.join('');
+
+    // Adiciona uma quebra de linha após cada conjunto
+    document.getElementById("minhaDiv").appendChild(document.createElement("br"));
 }
+
 // Função para reproduzir o áudio associado ao conjunto
 function reproduzirAudio6(conjuntoID6) {
     const tempoInput6 = document.getElementById(`tempo6_${conjuntoID6}`);
@@ -349,19 +400,38 @@ function reproduzirAudio6(conjuntoID6) {
         alert("Por favor, insira um tempo entre 1 e 60 segundos.");
         return; // Sai da função se o tempo estiver fora dos limites
     }
-    // Cria um novo elemento de áudio
-    const audio6 = new Audio("./Audio Piano/6_Lá_440Hz.mp3");
-    // Define o tempo inicial de reprodução
-    audio6.currentTime = 0;
-    // Define o tempo final de reprodução
-    audio6.addEventListener("timeupdate", function() {
-        if (audio6.currentTime >= tempo6) {
-            audio6.pause();
-        }
-    });
-    // Reproduz o áudio
-    audio6.play();
+    const form6 = document.getElementById(`form6_${conjuntoID6}`);
+    // Verifica se o formulário está preenchido
+    if (!form6.checkValidity()) {
+        form6.reportValidity();
+        return; // Sai da função se o formulário não estiver válido
+    }
+    // Verifica se há algum áudio em execução
+    if (!audiosGerados.length || audiosGerados.every(audio => audio.paused)) {
+        // Cria um novo elemento de áudio
+        const audio6 = new Audio("./Audio Piano/6_Lá_440Hz.mp3");
+        // Define o tempo inicial de reprodução
+        audio6.currentTime = 0;
+        // Define o tempo final de reprodução
+        audio6.addEventListener("timeupdate", function() {
+            if (audio6.currentTime >= tempo6) {
+                audio6.pause();
+            }
+        });
+        // Reproduz o áudio
+        audio6.play();
+        // Adiciona o áudio ao array de áudios gerados
+        audiosGerados.push(audio6);
+        // Adiciona um evento de fim de reprodução para remover o áudio do array
+        audio6.addEventListener("ended", function() {
+            const index6 = audiosGerados.indexOf(audio6);
+            if (index6 !== -1) {
+                audiosGerados.splice(index6, 1);
+            }
+        });
+    }
 }
+
 // Adiciona um evento de clique ao botão "Criar Botão"
 document.getElementById("botao7").addEventListener("click", function() {
     criarConjunto6();
@@ -377,10 +447,10 @@ function criarConjunto7() {
     // Cria um novo conjunto de elementos
     const novoConjunto7 = `
         <div id="${conjuntoID7}">
-            <form>
-                <label class="letrasLabel"for="tempo7_${conjuntoID7}">493,88 Hz, tempo:</label>
+            <form id="form7_${conjuntoID7}">
+                <label class="letrasLabel" for="tempo7_${conjuntoID7}">493,88 Hz, tempo:</label>
                 <input type="number" id="tempo7_${conjuntoID7}" name="tempo7" min="1" step="1" max="60" required>
-                <button class="botaoSom7"type="button" onclick="reproduzirAudio7('${conjuntoID7}')">Sí</button>
+                <button class="botaoSom7" type="button" onclick="reproduzirAudio7('${conjuntoID7}')">Sí</button>
             </form>
         </div>
     `;
@@ -388,7 +458,11 @@ function criarConjunto7() {
     botoesBlocos.push(novoConjunto7);
     // Atualiza a div minhaDiv com os conjuntos de elementos
     document.getElementById("minhaDiv").innerHTML = botoesBlocos.join('');
+
+    // Adiciona uma quebra de linha após cada conjunto
+    document.getElementById("minhaDiv").appendChild(document.createElement("br"));
 }
+
 // Função para reproduzir o áudio associado ao conjunto
 function reproduzirAudio7(conjuntoID7) {
     const tempoInput7 = document.getElementById(`tempo7_${conjuntoID7}`);
@@ -398,19 +472,38 @@ function reproduzirAudio7(conjuntoID7) {
         alert("Por favor, insira um tempo entre 1 e 60 segundos.");
         return; // Sai da função se o tempo estiver fora dos limites
     }
-    // Cria um novo elemento de áudio
-    const audio7 = new Audio("./Audio Piano/7_Sí_493p88Hz.mp3");
-    // Define o tempo inicial de reprodução
-    audio7.currentTime = 0;
-    // Define o tempo final de reprodução
-    audio7.addEventListener("timeupdate", function() {
-        if (audio7.currentTime >= tempo7) {
-            audio7.pause();
-        }
-    });
-    // Reproduz o áudio
-    audio7.play();
+    const form7 = document.getElementById(`form7_${conjuntoID7}`);
+    // Verifica se o formulário está preenchido
+    if (!form7.checkValidity()) {
+        form7.reportValidity();
+        return; // Sai da função se o formulário não estiver válido
+    }
+    // Verifica se há algum áudio em execução
+    if (!audiosGerados.length || audiosGerados.every(audio => audio.paused)) {
+        // Cria um novo elemento de áudio
+        const audio7 = new Audio("./Audio Piano/7_Sí_493p88Hz.mp3");
+        // Define o tempo inicial de reprodução
+        audio7.currentTime = 0;
+        // Define o tempo final de reprodução
+        audio7.addEventListener("timeupdate", function() {
+            if (audio7.currentTime >= tempo7) {
+                audio7.pause();
+            }
+        });
+        // Reproduz o áudio
+        audio7.play();
+        // Adiciona o áudio ao array de áudios gerados
+        audiosGerados.push(audio7);
+        // Adiciona um evento de fim de reprodução para remover o áudio do array
+        audio7.addEventListener("ended", function() {
+            const index7 = audiosGerados.indexOf(audio7);
+            if (index7 !== -1) {
+                audiosGerados.splice(index7, 1);
+            }
+        });
+    }
 }
+
 // Adiciona um evento de clique ao botão "Criar Botão"
 document.getElementById("botao8").addEventListener("click", function() {
     criarConjunto7();
@@ -426,10 +519,10 @@ function criarConjunto8() {
     // Cria um novo conjunto de elementos
     const novoConjunto8 = `
         <div id="${conjuntoID8}">
-            <form>
-                <label class="letrasLabel"for="tempo8_${conjuntoID8}">523,25 Hz, tempo:</label>
+            <form id="form8_${conjuntoID8}">
+                <label class="letrasLabel" for="tempo8_${conjuntoID8}">523,25 Hz, tempo:</label>
                 <input type="number" id="tempo8_${conjuntoID8}" name="tempo8" min="1" step="1" max="60" required>
-                <button class="botaoSom8"type="button" onclick="reproduzirAudio8('${conjuntoID8}')">dó</button>
+                <button class="botaoSom8" type="button" onclick="reproduzirAudio8('${conjuntoID8}')">dó</button>
             </form>
         </div>
     `;
@@ -437,7 +530,11 @@ function criarConjunto8() {
     botoesBlocos.push(novoConjunto8);
     // Atualiza a div minhaDiv com os conjuntos de elementos
     document.getElementById("minhaDiv").innerHTML = botoesBlocos.join('');
+
+    // Adiciona uma quebra de linha após cada conjunto
+    document.getElementById("minhaDiv").appendChild(document.createElement("br"));
 }
+
 // Função para reproduzir o áudio associado ao conjunto
 function reproduzirAudio8(conjuntoID8) {
     const tempoInput8 = document.getElementById(`tempo8_${conjuntoID8}`);
@@ -447,19 +544,38 @@ function reproduzirAudio8(conjuntoID8) {
         alert("Por favor, insira um tempo entre 1 e 60 segundos.");
         return; // Sai da função se o tempo estiver fora dos limites
     }
-    // Cria um novo elemento de áudio
-    const audio8 = new Audio("./Audio Piano/8_dó_523p25.mp3");
-    // Define o tempo inicial de reprodução
-    audio8.currentTime = 0;
-    // Define o tempo final de reprodução
-    audio8.addEventListener("timeupdate", function() {
-        if (audio8.currentTime >= tempo8) {
-            audio8.pause();
-        }
-    });
-    // Reproduz o áudio
-    audio8.play();
+    const form8 = document.getElementById(`form8_${conjuntoID8}`);
+    // Verifica se o formulário está preenchido
+    if (!form8.checkValidity()) {
+        form8.reportValidity();
+        return; // Sai da função se o formulário não estiver válido
+    }
+    // Verifica se há algum áudio em execução
+    if (!audiosGerados.length || audiosGerados.every(audio => audio.paused)) {
+        // Cria um novo elemento de áudio
+        const audio8 = new Audio("./Audio Piano/8_dó_523p25.mp3");
+        // Define o tempo inicial de reprodução
+        audio8.currentTime = 0;
+        // Define o tempo final de reprodução
+        audio8.addEventListener("timeupdate", function() {
+            if (audio8.currentTime >= tempo8) {
+                audio8.pause();
+            }
+        });
+        // Reproduz o áudio
+        audio8.play();
+        // Adiciona o áudio ao array de áudios gerados
+        audiosGerados.push(audio8);
+        // Adiciona um evento de fim de reprodução para remover o áudio do array
+        audio8.addEventListener("ended", function() {
+            const index8 = audiosGerados.indexOf(audio8);
+            if (index8 !== -1) {
+                audiosGerados.splice(index8, 1);
+            }
+        });
+    }
 }
+
 // Adiciona um evento de clique ao botão "Criar Botão"
 document.getElementById("botao9").addEventListener("click", function() {
     criarConjunto8();
