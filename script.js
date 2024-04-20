@@ -1,8 +1,6 @@
 // Array para armazenar os conjuntos de formulário e botão de reprodução de áudio
 let botoesBlocos = [];
 
-
-
 // Array para armazenar referências aos elementos de áudio gerados dinamicamente
 var audiosGerados = [];
 
