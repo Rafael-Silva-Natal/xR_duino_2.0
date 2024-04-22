@@ -599,8 +599,23 @@ document.getElementById("minhaDiv").innerHTML = botoesBlocos.join('');
 });
 
 
+//================================parar audios===============================
+// Função para parar todos os áudios em reprodução
+function pararTodosOsAudios() {
+    // Itera sobre cada elemento de áudio gerado e para sua reprodução
+    audiosGerados.forEach(function(audio) {
+        audio.pause(); // Pausa a reprodução do áudio
+        audio.currentTime = 0; // Define o tempo de reprodução como zero para reiniciar o áudio, se necessário
+    });
+  }
+  // Adiciona um evento de clique ao botão "botaoParar"
+  document.getElementById("botaoParar").addEventListener("click", function() {
+    pararTodosOsAudios(); // Chama a função para parar todos os áudios
+    audioEmExecucao = false;
+  });
+  //=============================================================================
 
-
+  /*
 //################################ sobre os botões de texto #################
 let linhasDeTexto = [];
 // adiciona ouvintes de evento de clique aos botões
@@ -639,20 +654,4 @@ const minhaDivTexto = document.querySelector("#minhaDivTexto");
       minhaDivTexto.innerHTML += linhasDeTexto[i].texto + "<br>";
     }
   }
-
-
-//================================parar audios===============================
-// Função para parar todos os áudios em reprodução
-function pararTodosOsAudios() {
-    // Itera sobre cada elemento de áudio gerado e para sua reprodução
-    audiosGerados.forEach(function(audio) {
-        audio.pause(); // Pausa a reprodução do áudio
-        audio.currentTime = 0; // Define o tempo de reprodução como zero para reiniciar o áudio, se necessário
-    });
-  }
-  // Adiciona um evento de clique ao botão "botaoParar"
-  document.getElementById("botaoParar").addEventListener("click", function() {
-    pararTodosOsAudios(); // Chama a função para parar todos os áudios
-    audioEmExecucao = false;
-  });
-  //=============================================================================
+*/

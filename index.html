@@ -7,11 +7,79 @@
     <link rel="shortcut icon" href="./Imagens/xR_duin_Icon.jpg"/>
     <link rel="stylesheet" href="style.css">
 </head>
+<style>
+  .widget {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 250px;
+  background-color: #8e0fe8;
+  border: 8px solid rgb(53, 4, 252); /* Borda */
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  z-index: 9999;
+  display: none;
+}
+.widget-content {
+  padding: 20px;
+}
+.widget-header {
+  text-align: right;
+}
+.close-btn {
+  cursor: pointer;
+}
+.widget-body {
+  max-height: 200px;
+  overflow-y:auto;
+}
+.textoHelo1{
+  text-shadow: 1px 1px  rgb(53, 4, 252);
+  font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  color: black;
+  text-align: justify;      
+}
+.widget2 {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 250px;
+  background-color: #8e0fe8;
+  border: 8px solid rgb(53, 4, 252); /* Borda verde */
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  z-index: 9999;
+  display: none;
+}
+.widget-content2 {
+  padding: 20px;
+}
+.widget-header2 {
+  text-align: right;
+}
+.close-btn2 {
+  cursor: pointer;
+}
+.widget-body2 {
+  max-height: 200px;
+  overflow-y: auto;
+}
+.textoHelo2{
+  text-shadow: 1px 1px  rgb(53, 4, 252);
+  font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  color: black;
+  text-align: justify;
+}
+</style>
+
+
 
 <body class="body">
     
-
-  
           <div id="topo">
             <div id="paragrafo">
             <p class="cabeçalho">xR_duíno IDE versão 2.0</p><br><br>
@@ -22,13 +90,66 @@
             </div>-->
           </div>
   
+          <div id="widget" class="widget">
+            <div class="widget-content">
+              <div class="widget-header">
+                <span class="close-btn" onclick="closeWidget()">X</span>
+              </div>
+              <div class="widget-body">
+                <p class="textoHelo1">O programador Rafael Silva diz: Bons estudos para todos!<br><br> Espero que este programa 
+                  possa ajudar todos que precisarem de uma ferramenta de manipulação de frequências 
+                  sonoras. O uso é simples e instintivo, basta clicar nas notas musicais, e preencher
+                   os formulários de tempo e salvar as sequencias de notas clicando no botão gravar!
+                    A frequência gerada pode ser ouvida clicando no botão gerado no formulário, o botão
+                     Break sound serve para parar a execução de audios que estão sendo ouvidos. Você 
+                     poderá montar uma sequência lógica de blocos para gravar em um pendrive e usar no
+                      seu xR_duíno! Além dos botões das notas,ouvir frequência, break sound e gravar
+                       existe o botão apagar blocos, que serve para apagar sequências criadas! Este programa 
+                       ainda precisa de muitas atualizações e melhorias!! mas acredito que um bom estudante
+                        poderá superar as falhas dessa versão inicial, deixei um repositório público no git hub!!
+                         Espero vocês por lá!! Deixem seus comentários e opniões!!<br><br>
+                         Agora clique em fechar e boa sorte!</p>
+                <!-- More extensive text goes here -->
+              </div>
+            </div>
+        </div>
+        <div id="widget2" class="widget2">
+          <div class="widget-content2">
+            <div class="widget-header2">
+              <span class="close-btn2" onclick="closeWidget2()">X</span>
+            </div>
+            <div class="widget-body2">
+              <p class="textoHelo2">"O QUE É xR_duíno???<br><br>Pode se dizer que é um Arduino caseiro feito com qualquer
+                 caixinha de som, com leitor de pendrive, um pendrive, e um drive na configuração de relé sônica...<br>
+                 LÓGICA:<br>No pendrive,grava-se as notas musicais em suas devidas frequências, no formato mp3; 
+                 Ao reproduzir as notas musicais na caixa de som o fone deverá ser removido(ou não), para que as ondas das
+                  frequências do pendrive com as gravações de audio sejam usadas para manipular outros circuitos...
+                  Driver de relé sônica deve ser configurado para manipulações de aparelhos ou mesmo portas lógicas...
+                   etc...Considerando que a configuração de hardware funcione perfeitamente a ideia seguinte será programar
+                    os audios na IDE de manipulação de dados para facilitar o manuseio de comandos...Dentro da lógica
+                     de programação em blocos, a IDE deve fornecer um menu de audios, nas devidas frequências em formato mp3
+                      para serem organizados numa area de trabalho, possibilitando tambem gravações de audio.
+                       Ao organizar a sequência de audios em frequencias desejadas a mesma deve ser salva no
+                        pendrive para ser executado no xR_duíno. Esta Tecnologia é nova no mercado, portanto drivers
+                         plug and play para dispositivos sonoros ainda não estão acessiveis no mercado restando as alternativas
+                          de importação do drive ou mesmo a fabricação do mesmo!! No momento a lightPage informa que
+                           a tecnologia ainda está na fase da prototipagem, no entanto estamos abertos a comentários 
+                           e sugestões e possiveis negociações...</p>
+              <!-- More extensive text goes here -->
+            </div>
+          </div>
+      </div>
+
+
+
+
 
         <div id="conteudo">
             <div id="meusBotoes">
               <spam class="titu">O autor diz:</spam><br>
-              <button id="mensagem">Bons estudos!</button><br>
+              <button id="mensagem" onclick="openWidget()">Bons estudos!</button><br>
               <spam class="titu">Sobre este Programa:</spam><br>
-              <button id="botao1">Helo xR_duíno!</button><br>
+              <button id="botao1" onclick="openWidget2()">Helo xR_duíno!</button><br>
     
               <spam class="titulos">Dó</spam><br>
               <button id="botao2">261,63 Hz</button><br>
@@ -61,5 +182,24 @@
           </div>
            <!-- <button id="gravador">Gravar</button>-->
           <script src="script.js"></script>
+          <script>
+            function openWidget() {
+  document.getElementById('widget').style.display = 'block';
+}
+
+function closeWidget() {
+  document.getElementById('widget').style.display = 'none';
+}
+function openWidget2() {
+  document.getElementById('widget2').style.display = 'block';
+}
+
+function closeWidget2() {
+  document.getElementById('widget2').style.display = 'none';
+}
+
+          </script>
+
+
 </body>
 </html>
