@@ -83,6 +83,24 @@ display: inline-block;
        font-size: 2.0em;
        text-align:center;
     }
+
+    #meusBotoes::-webkit-scrollbar {
+      width: 12px; /* largura da barra de rolagem */
+    }
+    
+    #meusBotoes::-webkit-scrollbar-track {
+      background-color: #f1f1f1; /* cor de fundo da barra de rolagem */
+    }
+    
+    #meusBotoes::-webkit-scrollbar-thumb {
+      background-color: #888; /* cor do botão da barra de rolagem */
+      border-radius: 6px; /* arredondamento das bordas do botão da barra de rolagem */
+    }
+    
+    #meusBotoes::-webkit-scrollbar-thumb:hover {
+      background-color: #555; /* cor do botão da barra de rolagem ao passar o mouse */
+    }
+    
     
     #meusBotoes {
         display: inline-block;/*define formato e cores para a box e conteudo dos botões*/
